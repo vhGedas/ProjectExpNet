@@ -32,7 +32,7 @@ ehthumbs.db
 Desktop.ini
 
 ## Ignore arquivos gerados por designer
-*.Designer.cs
+
 
 ## Ignore configurações locais
 *.launchSettings.json
