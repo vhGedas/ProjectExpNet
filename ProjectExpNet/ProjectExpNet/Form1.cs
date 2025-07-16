@@ -1,12 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Oracle.EntityFrameworkCore;
+using Oracle.ManagedDataAccess.Client;
+using ProjectExpNet.Data;
+using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
-using Microsoft.EntityFrameworkCore;
-using ProjectExpNet.Data;
 
 
 namespace ProjectExpNet
 {
-  
+
     public partial class Form1 : Form
     {
         public Form1()
@@ -16,15 +20,75 @@ namespace ProjectExpNet
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<Context>();
-            optionsBuilder.UseOracle("User Id=VH_NET;Password=MANAGER;Data Source=192.168.1.237:1521/ORCL;"); 
+            //var optionsBuilder = new DbContextOptionsBuilder<Context>();
+            //optionsBuilder.UseOracle("User Id=VH_NET;Password=MANAGER;Data Source=192.168.1.237:1521/ORCL;");
 
-            using var context = new Context(optionsBuilder.Options);
-            var clientes = context.Cidades.ToList();
-            int x = 0;
+            //using var context = new Context(optionsBuilder.Options);
+            //var cidades = context.Cidades.ToList();
+            //int x = 0;
         }
-        
-        
-      
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TextBoxUser_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendKeys.Send("{TAB}");
+                e.SuppressKeyPress = true;
+            }
+
+
+
+
+        }
+
+        private void TextBoxSenha_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendKeys.Send("{TAB}");
+                e.SuppressKeyPress = true;
+            }
+
+
+
+
+        }
+
+        private void TextBoxUser_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TextBoxSenha_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtBoxDatabase_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var user = TextBoxUser.Text;
+            var pass = TextBoxSenha.Text;
+            var data = TxtBoxDatabase.Text;
+
+            var optionsBuilder = new DbContextOptionsBuilder<Context>();
+            optionsBuilder.UseOracle($"User Id={user};Password={pass};Data Source={data}:1521/ORCL;");
+            
+
+        }
     }
 }
