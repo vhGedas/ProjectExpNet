@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
             LblUser = new Label();
             TextBoxUser = new TextBox();
             LblSenha = new Label();
@@ -36,17 +35,9 @@
             LblDatabase = new Label();
             TxtBoxDatabase = new TextBox();
             BtnConectar = new Button();
+            dataGridView1 = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new Point(739, 415);
-            button1.Name = "button1";
-            button1.Size = new Size(139, 23);
-            button1.TabIndex = 1;
-            button1.Text = "Connect";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // LblUser
             // 
@@ -120,11 +111,20 @@
             BtnConectar.UseVisualStyleBackColor = true;
             BtnConectar.Click += button2_Click;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(12, 55);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(866, 383);
+            dataGridView1.TabIndex = 11;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(890, 450);
+            Controls.Add(dataGridView1);
             Controls.Add(BtnConectar);
             Controls.Add(TxtBoxDatabase);
             Controls.Add(LblDatabase);
@@ -132,15 +132,14 @@
             Controls.Add(LblSenha);
             Controls.Add(TextBoxUser);
             Controls.Add(LblUser);
-            Controls.Add(button1);
             Name = "Form1";
             Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Button button1;
         private Label LblUser;
         private TextBox TextBoxUser;
         private Label LblSenha;
@@ -148,5 +147,6 @@
         private Label LblDatabase;
         private TextBox TxtBoxDatabase;
         private Button BtnConectar;
+        private DataGridView dataGridView1;
     }
 }

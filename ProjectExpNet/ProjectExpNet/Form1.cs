@@ -19,15 +19,7 @@ namespace ProjectExpNet
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //var optionsBuilder = new DbContextOptionsBuilder<Context>();
-            //optionsBuilder.UseOracle("User Id=VH_NET;Password=MANAGER;Data Source=192.168.1.237:1521/ORCL;");
-
-            //using var context = new Context(optionsBuilder.Options);
-            //var cidades = context.Cidades.ToList();
-            //int x = 0;
-        }
+        
 
         private void label1_Click(object sender, EventArgs e)
         {
