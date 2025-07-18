@@ -5,6 +5,7 @@ using Oracle.ManagedDataAccess.Client;
 using ProjectExpNet.Data;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Reflection.Emit;
 
 
@@ -81,14 +82,42 @@ namespace ProjectExpNet
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var user = TextBoxUser.Text;
-            var pass = TextBoxSenha.Text;
-            var data = TxtBoxDatabase.Text;
+            var user = TextBoxUser.Text.ToUpper();
+            var pass = TextBoxSenha.Text.ToUpper();
+            var data = TxtBoxDatabase.Text.ToUpper();
 
             var optionsBuilder = new DbContextOptionsBuilder<Context>();
             optionsBuilder.UseOracle($"User Id={user};Password={pass};Data Source={data}:1521/ORCL;");
+            using var context = new Context(optionsBuilder.Options);
+
+            //List<Cidade> cidades = context.Cidades.FromSqlRaw("SELECT TRUNC (SYSDATE) FROM DUAL").ToList();
+            //var dt = DbContextExtensions.ExecuteSqlToDataTable(context, "SELECT TRUNC (SYSDATE) FROM DUAL");
             
 
+            var dt = DbContextExtensions.ExecuteSqlToDataTable(context, "SELECT SYSDATE AS DATA_ATUAL FROM DUAL");
+
+            if (dt.Rows.Count > 0)
+            {
+                DateTime dataAtual = Convert.ToDateTime(dt.Rows[0]["DATA_ATUAL"]);
+
+                MessageBox.Show($"Data atual (Oracle): {dataAtual:dd/MM/yyyy}",
+                                "Resultado da Query",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Nenhum dado retornado da consulta.",
+                                "Aviso",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+            }
+
+            int x = 0;
+
         }
+
+       
     }
+
 }
