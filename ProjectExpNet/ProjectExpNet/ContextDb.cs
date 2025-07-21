@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ProjectExpNet.Data
 {
-    public class Context : DbContext
+    public class ContextDb : DbContext
     {
-        public Context(DbContextOptions<Context> options) : base(options) { }
+        public ContextDb(DbContextOptions<ContextDb> options) : base(options) { }
         public DbSet<Cidade> Cidades { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

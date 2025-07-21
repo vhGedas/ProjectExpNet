@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             LblUser = new Label();
             TextBoxUser = new TextBox();
             LblSenha = new Label();
@@ -179,6 +180,7 @@
             Controls.Add(LblSenha);
             Controls.Add(TextBoxUser);
             Controls.Add(LblUser);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "EXPORTAÇÃO DE DADOS";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

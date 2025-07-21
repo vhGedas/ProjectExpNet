@@ -1,4 +1,5 @@
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.InkML;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Oracle.EntityFrameworkCore;
@@ -15,10 +16,13 @@ namespace ProjectExpNet
 
     public partial class Form1 : Form
     {
+
+
         public Form1()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+            //this.WindowState = FormWindowState.Maximized;
         }
 
 
@@ -80,26 +84,62 @@ namespace ProjectExpNet
             var data = TxtBoxDatabase.Text.ToUpper();
             var empresaid = textBoxEmpresaId.Text.ToUpper();
 
-            var optionsBuilder = new DbContextOptionsBuilder<Context>();
+
+            var optionsBuilder = new DbContextOptionsBuilder<ContextDb>();
             optionsBuilder.UseOracle($"User Id={user};Password={pass};Data Source={data}:1521/ORCL;");
-            using var context = new Context(optionsBuilder.Options);
+            using var context = new ContextDb(optionsBuilder.Options);
 
-                try
-                {
+            try
+            {
 
-                    DataTable resultado = DbContextExtensions.ExecuteSqlToDataTable(context,
-                        sql: $"SELECT M.MARCAID, M.DESCRICAO FROM MARCAS M WHERE M.EMPRESAID = {empresaid} ORDER BY M.MARCAID"
+                DataTable resultado = DbContextExtensions.ExecuteSqlToDataTable(context,
+                    sql: $@"SELECT C.BAIRRO,
+                                   C.CEP,
+                                   C.NOME_CIDADE,
+                                   E.NOME,
+                                   C.ESTADOID,
+                                   C.CNPJ_CPF,
+                                   C.E_MAIL,
+                                   C.ENDERECO,
+                                   C.RAZAO_SOCIAL,
+                                   C.COMPLEMENTO,
+                                   C.NUMERO,
+                                   C.SITE,
+                                   C.INSCRICAO_ESTADUAL,
+                                   C.INSCRICAO_MUNICIPAL,
+                                   C.NOME_FANTASIA,
+                                   C.TIPO_CLIENTE,
+                                   C.OPTANTE_SIMPLES,
+                                   C.DOC_IDENTIDADE,
+                                   C.ORGAO_EXPEDIDOR,
+                                   C.UF_ORGAO_EXPEDIDOR,
+                                   C.NATURALIDADE,
+                                   C.SEXO,
+                                   C.ESTADO_CIVIL,
+                                   C.NACIONALIDADE,
+                                   C.GRUPOID,
+                                   G.NOME,
+                                   C.TABELA_PRECOID,
+                                   C.NOME_TABELA_PRECO,
+                                   C.VENDEDORID,
+                                   C.CONDICAOID, 
+                                   C.NOME_CONDICAO
+                              FROM VW_CLIENTES C, ESTADOS E, GRUPO_CLIENTES G
+                             WHERE  C.ESTADOID = E.ESTADOID
+                               AND C.GRUPOID = G.GRUPOID
+                               AND C.EMPRESAID = G.EMPRESAID
+                               AND C.EMPRESAID = {empresaid}"
 
-                        );
+                    );
 
-                    dataGridView1.DataSource = resultado;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Erro: {ex.Message}", "Erro ao carregar dados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                dataGridView1.DataSource = resultado;
             }
-        
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro: {ex.Message}", "Erro ao carregar dados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -149,7 +189,7 @@ namespace ProjectExpNet
             }
         }
 
-        
+      
     }
 }
     
