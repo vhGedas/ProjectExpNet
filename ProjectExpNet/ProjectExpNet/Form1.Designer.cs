@@ -180,7 +180,7 @@
             Controls.Add(TextBoxUser);
             Controls.Add(LblUser);
             Name = "Form1";
-            Text = "Form1";
+            Text = "EXPORTAÇÃO DE DADOS";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
