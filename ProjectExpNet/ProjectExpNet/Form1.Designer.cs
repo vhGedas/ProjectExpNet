@@ -36,6 +36,8 @@
             TxtBoxDatabase = new TextBox();
             BtnConectar = new Button();
             dataGridView1 = new DataGridView();
+            button1 = new Button();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -113,17 +115,41 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(12, 55);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(866, 383);
+            dataGridView1.Size = new Size(875, 398);
             dataGridView1.TabIndex = 11;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(12, 472);
+            button1.Name = "button1";
+            button1.Size = new Size(105, 23);
+            button1.TabIndex = 12;
+            button1.Text = "ORGANIZAR";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(763, 472);
+            button2.Name = "button2";
+            button2.Size = new Size(115, 23);
+            button2.TabIndex = 13;
+            button2.Text = "EXPORTAR";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click_1;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(890, 450);
+            ClientSize = new Size(899, 507);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(dataGridView1);
             Controls.Add(BtnConectar);
             Controls.Add(TxtBoxDatabase);
@@ -148,5 +174,7 @@
         private TextBox TxtBoxDatabase;
         private Button BtnConectar;
         private DataGridView dataGridView1;
+        private Button button1;
+        private Button button2;
     }
 }

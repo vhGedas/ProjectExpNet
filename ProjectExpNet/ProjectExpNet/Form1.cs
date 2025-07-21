@@ -19,7 +19,7 @@ namespace ProjectExpNet
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
         }
-        
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -84,32 +84,38 @@ namespace ProjectExpNet
 
             //List<Cidade> cidades = context.Cidades.FromSqlRaw("SELECT TRUNC (SYSDATE) FROM DUAL").ToList();
             //var dt = DbContextExtensions.ExecuteSqlToDataTable(context, "SELECT TRUNC (SYSDATE) FROM DUAL");
-            
 
-            var dt = DbContextExtensions.ExecuteSqlToDataTable(context, "SELECT SYSDATE AS DATA_ATUAL FROM DUAL");
 
-            if (dt.Rows.Count > 0)
+            try
             {
-                DateTime dataAtual = Convert.ToDateTime(dt.Rows[0]["DATA_ATUAL"]);
 
-                MessageBox.Show($"Data atual (Oracle): {dataAtual:dd/MM/yyyy}",
-                                "Resultado da Query",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                DataTable resultado = DbContextExtensions.ExecuteSqlToDataTable(context, "SELECT * FROM CIDADES");
+
+                dataGridView1.DataSource = resultado;
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Nenhum dado retornado da consulta.",
-                                "Aviso",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
+                MessageBox.Show($"Erro: {ex.Message}", "Erro ao carregar dados", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            int x = 0;
+        }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
 
-       
-    }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView1.AutoResizeColumns();
+        }
 
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        
+    }
 }
+    
+
