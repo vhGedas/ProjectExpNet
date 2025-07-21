@@ -1,3 +1,4 @@
+using ClosedXML.Excel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Oracle.EntityFrameworkCore;
@@ -77,27 +78,28 @@ namespace ProjectExpNet
             var user = TextBoxUser.Text.ToUpper();
             var pass = TextBoxSenha.Text.ToUpper();
             var data = TxtBoxDatabase.Text.ToUpper();
+            var empresaid = textBoxEmpresaId.Text.ToUpper();
 
             var optionsBuilder = new DbContextOptionsBuilder<Context>();
             optionsBuilder.UseOracle($"User Id={user};Password={pass};Data Source={data}:1521/ORCL;");
             using var context = new Context(optionsBuilder.Options);
 
-            //List<Cidade> cidades = context.Cidades.FromSqlRaw("SELECT TRUNC (SYSDATE) FROM DUAL").ToList();
-            //var dt = DbContextExtensions.ExecuteSqlToDataTable(context, "SELECT TRUNC (SYSDATE) FROM DUAL");
+                try
+                {
 
+                    DataTable resultado = DbContextExtensions.ExecuteSqlToDataTable(context,
+                        sql: $"SELECT M.MARCAID, M.DESCRICAO FROM MARCAS M WHERE M.EMPRESAID = {empresaid} ORDER BY M.MARCAID"
 
-            try
-            {
+                        );
 
-                DataTable resultado = DbContextExtensions.ExecuteSqlToDataTable(context, "SELECT * FROM CIDADES");
-
-                dataGridView1.DataSource = resultado;
+                    dataGridView1.DataSource = resultado;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erro: {ex.Message}", "Erro ao carregar dados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro: {ex.Message}", "Erro ao carregar dados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -106,12 +108,45 @@ namespace ProjectExpNet
         private void button1_Click(object sender, EventArgs e)
         {
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.AutoResizeColumns();
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            if (dataGridView1.DataSource == null)
+            {
+                MessageBox.Show("Nenhum dado para exportar!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            using (SaveFileDialog sfd = new SaveFileDialog()
+            {
+                Filter = "Excel Workbook|*.xlsx",
+                Title = "Salvar como Excel",
+                FileName = "Relatorio.xlsx"
+            })
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        var dt = (DataTable)dataGridView1.DataSource;
+
+                        using (var wb = new XLWorkbook())
+                        {
+                            wb.Worksheets.Add(dt, "Consulta");
+                            wb.SaveAs(sfd.FileName);
+                        }
+
+                        MessageBox.Show("Exportado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Erro ao exportar: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
 
         

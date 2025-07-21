@@ -38,6 +38,8 @@
             dataGridView1 = new DataGridView();
             button1 = new Button();
             button2 = new Button();
+            label1 = new Label();
+            textBoxEmpresaId = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -55,7 +57,7 @@
             // 
             TextBoxUser.CausesValidation = false;
             TextBoxUser.ForeColor = SystemColors.WindowText;
-            TextBoxUser.Location = new Point(94, 19);
+            TextBoxUser.Location = new Point(97, 19);
             TextBoxUser.Name = "TextBoxUser";
             TextBoxUser.Size = new Size(133, 23);
             TextBoxUser.TabIndex = 3;
@@ -105,9 +107,9 @@
             // 
             // BtnConectar
             // 
-            BtnConectar.Location = new Point(725, 19);
+            BtnConectar.Location = new Point(735, 12);
             BtnConectar.Name = "BtnConectar";
-            BtnConectar.Size = new Size(75, 23);
+            BtnConectar.Size = new Size(127, 61);
             BtnConectar.TabIndex = 10;
             BtnConectar.Text = "CONECTAR";
             BtnConectar.UseVisualStyleBackColor = true;
@@ -117,15 +119,15 @@
             // 
             dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 55);
+            dataGridView1.Location = new Point(12, 86);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(875, 398);
+            dataGridView1.Size = new Size(875, 470);
             dataGridView1.TabIndex = 11;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // button1
             // 
-            button1.Location = new Point(12, 472);
+            button1.Location = new Point(12, 574);
             button1.Name = "button1";
             button1.Size = new Size(105, 23);
             button1.TabIndex = 12;
@@ -135,7 +137,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(763, 472);
+            button2.Location = new Point(763, 574);
             button2.Name = "button2";
             button2.Size = new Size(115, 23);
             button2.TabIndex = 13;
@@ -143,11 +145,30 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click_1;
             // 
+            // label1
+            // 
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(12, 52);
+            label1.Name = "label1";
+            label1.Size = new Size(105, 31);
+            label1.TabIndex = 14;
+            label1.Text = "EMPRESAID:";
+            // 
+            // textBoxEmpresaId
+            // 
+            textBoxEmpresaId.Location = new Point(112, 50);
+            textBoxEmpresaId.Name = "textBoxEmpresaId";
+            textBoxEmpresaId.Size = new Size(118, 23);
+            textBoxEmpresaId.TabIndex = 15;
+            textBoxEmpresaId.Text = "1";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(899, 507);
+            ClientSize = new Size(905, 609);
+            Controls.Add(textBoxEmpresaId);
+            Controls.Add(label1);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
@@ -176,5 +197,7 @@
         private DataGridView dataGridView1;
         private Button button1;
         private Button button2;
+        private Label label1;
+        private TextBox textBoxEmpresaId;
     }
 }
