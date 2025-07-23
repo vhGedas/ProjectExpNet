@@ -23,6 +23,9 @@ namespace ProjectExpNet
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             //this.WindowState = FormWindowState.Maximized;
+            //dataGridView1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            //button2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            //button1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
         }
 
 
@@ -77,6 +80,7 @@ namespace ProjectExpNet
 
         }
 
+        
         private void button2_Click(object sender, EventArgs e)
         {
             var user = TextBoxUser.Text.ToUpper();
@@ -138,7 +142,11 @@ namespace ProjectExpNet
             {
                 MessageBox.Show($"Erro: {ex.Message}", "Erro ao carregar dados", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }     
+
+   
+
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -189,6 +197,20 @@ namespace ProjectExpNet
             }
         }
 
-      
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click_1(object sender, EventArgs e)
+        {
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        
     }
 }
