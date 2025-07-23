@@ -100,9 +100,52 @@ namespace ProjectExpNet
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Arrumando colunas linhas na aba de CLIENTES
+
             dataGridViewCliente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridViewCliente.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCliente.AutoResizeColumns();
+
+            //Arrumando colunas e linhas na aba de Telefone de Clientes
+            dataGridViewTelCliente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewTelCliente.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewTelCliente.AutoResizeColumns();
+
+            //Arrumando colunas e linhas na aba de Fornecedores
+            dataGridViewFornecedor.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewFornecedor.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewFornecedor.AutoResizeColumns();
+
+            //Arrumando colunas e linhas na aba de Telefone de Fornecedores
+            dataGridViewTelFornecedor.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewTelFornecedor.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewTelFornecedor.AutoResizeColumns();
+
+            //Arrumando colunas e linhas na aba de Grupo de produtos.
+            dataGridViewGrupoProd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewGrupoProd.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewGrupoProd.AutoResizeColumns();
+
+            //Arrumando colunas e linhas na aba de Marca
+            dataGridViewMarca.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewMarca.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewMarca.AutoResizeColumns();
+
+            //Arrumando colunas e linhas na aba de Linha
+            dataGridViewLinha.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewLinha.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewLinha.AutoResizeColumns();
+
+            //Arrumando colunas e linhas na aba de NCM
+            dataGridViewNcm.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewNcm.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewNcm.AutoResizeColumns();
+
+            //Arrumando colunas e linhas na aba de Produtos
+            dataGridViewProdutos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewProdutos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewProdutos.AutoResizeColumns();
+
         }
 
         private void button2_Click_1(object sender, EventArgs e)
