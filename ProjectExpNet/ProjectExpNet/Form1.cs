@@ -86,7 +86,15 @@ namespace ProjectExpNet
 
         private void button2_Click(object sender, EventArgs e)
         {
+            var user = TextBoxUser.Text.ToUpper();
+            var pass = TextBoxSenha.Text.ToUpper();
+            var data = TxtBoxDatabase.Text.ToUpper();
+            var empresaid = textBoxEmpresaId.Text.ToUpper();
 
+
+            var optionsBuilder = new DbContextOptionsBuilder<ContextDb>();
+            optionsBuilder.UseOracle($"User Id={user};Password={pass};Data Source={data}:1521/ORCL;");
+            using var context = new ContextDb(optionsBuilder.Options);
         }
 
 
@@ -137,14 +145,14 @@ namespace ProjectExpNet
             dataGridViewLinha.AutoResizeColumns();
 
             //Arrumando colunas e linhas na aba de NCM
-            dataGridViewNcm.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewNcm.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewNcm.AutoResizeColumns();
+            //dataGridViewNcm.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            //dataGridViewNcm.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            //dataGridViewNcm.AutoResizeColumns();
 
             //Arrumando colunas e linhas na aba de Produtos
-            dataGridViewProdutos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewProdutos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewProdutos.AutoResizeColumns();
+            //dataGridViewProdutos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            //dataGridViewProdutos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            //dataGridViewProdutos.AutoResizeColumns();
 
         }
 
