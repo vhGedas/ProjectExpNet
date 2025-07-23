@@ -4,12 +4,14 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Oracle.EntityFrameworkCore;
+using Oracle.EntityFrameworkCore.Storage.Internal;
 using Oracle.ManagedDataAccess.Client;
 using ProjectExpNet.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Reflection.Emit;
+using System.Text;
 
 
 namespace ProjectExpNet
@@ -30,6 +32,7 @@ namespace ProjectExpNet
 
             Processar(0);
         }
+        
 
 
         private void label1_Click(object sender, EventArgs e)
@@ -86,15 +89,7 @@ namespace ProjectExpNet
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var user = TextBoxUser.Text.ToUpper();
-            var pass = TextBoxSenha.Text.ToUpper();
-            var data = TxtBoxDatabase.Text.ToUpper();
-            var empresaid = textBoxEmpresaId.Text.ToUpper();
 
-
-            var optionsBuilder = new DbContextOptionsBuilder<ContextDb>();
-            optionsBuilder.UseOracle($"User Id={user};Password={pass};Data Source={data}:1521/ORCL;");
-            using var context = new ContextDb(optionsBuilder.Options);
         }
 
 
@@ -156,42 +151,169 @@ namespace ProjectExpNet
 
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        public void ExportarDataTableParaCSV(DataTable tabela, string nomeArquivo)
         {
-            if (dataGridViewCliente.DataSource == null)
+            if (tabela == null || tabela.Rows.Count == 0)
             {
-                MessageBox.Show("Nenhum dado para exportar!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Nenhum dado para exportar!");
                 return;
             }
 
-            using (SaveFileDialog sfd = new SaveFileDialog()
+            string pastaExportacao = @"C:\MeusExports";
+
+            if (!Directory.Exists(pastaExportacao))
             {
-                Filter = "Excel Workbook|*.xlsx",
-                Title = "Salvar como Excel",
-                FileName = "Relatorio.xlsx"
-            })
+                Directory.CreateDirectory(pastaExportacao);
+            }
+            string hash = Guid.NewGuid().ToString("N").Substring(0, 6);
+            string caminhoArquivo = Path.Combine(pastaExportacao, $"{nomeArquivo}.csv");
+            try
             {
-                if (sfd.ShowDialog() == DialogResult.OK)
+                var linhas = new List<string>();
+                // Cabeçalho
+                string cabecalho = string.Join(";", tabela.Columns.Cast<DataColumn>().Select(col => col.ColumnName));
+                linhas.Add(cabecalho);
+                // Dados
+                foreach (DataRow row in tabela.Rows)
                 {
-                    try
-                    {
-                        var dt = (DataTable)dataGridViewCliente.DataSource;
-
-                        using (var wb = new XLWorkbook())
-                        {
-                            wb.Worksheets.Add(dt, "Consulta");
-                            wb.SaveAs(sfd.FileName);
-                        }
-
-                        MessageBox.Show("Exportado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Erro ao exportar: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    string linha = string.Join(";", row.ItemArray.Select(valor => valor?.ToString()?.Replace(";", ",") ?? ""));
+                    linhas.Add(linha);
                 }
+                File.WriteAllLines(caminhoArquivo, linhas, Encoding.UTF8);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao exportar: {ex.Message}");
             }
         }
+
+        private DataTable getDataDb(string sql)
+        {
+
+            try
+            {
+                var user = TextBoxUser.Text.ToUpper();
+                var pass = TextBoxSenha.Text.ToUpper();
+                var data = TxtBoxDatabase.Text.ToUpper();
+                var empresaid = textBoxEmpresaId.Text.ToUpper();
+
+
+                var optionsBuilder = new DbContextOptionsBuilder<ContextDb>();
+                optionsBuilder.UseOracle($"User Id={user};Password={pass};Data Source={data}:1521/ORCL;");
+                using var context = new ContextDb(optionsBuilder.Options);
+
+
+                sql = String.Format(Dados.Clientes, empresaid);
+                return DbContextExtensions.ExecuteSqlToDataTable(context, sql);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        private bool validaVazio()
+        {
+
+            if (TextBoxUser.Text.Length > 0)
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+
+        public void button2_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!validaVazio())
+                {
+                    MessageBox.Show("Nada a exportar!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                string pastaExportacao = @"C:\MeusExports";
+                // Cria a pasta, se não existir
+                if (!System.IO.Directory.Exists(pastaExportacao))
+                {
+                    System.IO.Directory.CreateDirectory(pastaExportacao);
+                }
+                else
+                {
+                    // Limpa todos os arquivos da pasta
+                    string[] arquivosExistentes = System.IO.Directory.GetFiles(pastaExportacao);
+                    foreach (string arquivo in arquivosExistentes)
+                    {
+                        System.IO.File.Delete(arquivo);
+                    }
+                }
+                string sqlClientes = Dados.Clientes;
+                if (sqlClientes.Count() != 0)
+                {
+                    ExportarDataTableParaCSV(getDataDb(sqlClientes), "Clientes");
+                }
+
+                string sqlNcm = Dados.Ncm;
+                if (sqlNcm.Count() != 0)
+                {
+                    ExportarDataTableParaCSV(getDataDb(sqlNcm), "Ncm");
+                }
+                string sqlFornecedores = Dados.Fornecedor;
+                if (sqlFornecedores.Count() != 0)
+                {
+                    ExportarDataTableParaCSV(getDataDb(sqlFornecedores), "Fornecedores");
+                }
+                string sqlGrupoProdutos = Dados.GrupoProd;
+                if (sqlGrupoProdutos.Count() != 0)
+                {
+                    ExportarDataTableParaCSV(getDataDb(sqlGrupoProdutos), "GrupoProdutos");
+                }
+                string sqlLinhaProdutos = Dados.Linha;
+                if (sqlLinhaProdutos.Count() != 0)
+                {
+                    ExportarDataTableParaCSV(getDataDb(sqlLinhaProdutos), "LinhaProdutos");
+                }
+                string sqlMarcaProdutos = Dados.Marca;
+                if (sqlMarcaProdutos.Count() != 0)
+                {
+                    ExportarDataTableParaCSV(getDataDb(sqlMarcaProdutos), "MarcaProdutos");
+                }
+                string sqlProdutos = Dados.Produtos;
+                if (sqlProdutos.Count() != 0)
+                {
+                    ExportarDataTableParaCSV(getDataDb(sqlProdutos), "Produtos");
+                }
+                string sqlTelefoneClientes = Dados.TelefoneCliente;
+                if (sqlTelefoneClientes.Count() != 0)
+                {
+                    ExportarDataTableParaCSV(getDataDb(sqlTelefoneClientes), "TelefoneClientes");
+                }
+                string sqlTelefoneFornecedores = Dados.TelefoneFornecedor;
+                if (sqlTelefoneFornecedores.Count() != 0)
+                {
+                    ExportarDataTableParaCSV(getDataDb(sqlTelefoneFornecedores), "TelefoneFornecedores");
+                }
+
+                MessageBox.Show($"Exportação concluída com sucesso!\nArquivo salvo em: {pastaExportacao}", "Exportação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var resultado = MessageBox.Show("Deseja abrir o arquivo agora?", "Abrir arquivo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resultado == DialogResult.Yes)
+                {
+                    var psi = new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = pastaExportacao,
+                        UseShellExecute = true
+                    };
+                    System.Diagnostics.Process.Start(psi);
+                }
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show(erro.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
@@ -284,7 +406,8 @@ namespace ProjectExpNet
                     dataGridViewNcm.DataSource = resultado;
                 }
 
-                else if (index == 8) {
+                else if (index == 8)
+                {
 
                     sql = String.Format(Dados.Produtos, empresaid);
                     resultado = DbContextExtensions.ExecuteSqlToDataTable(context, sql);
@@ -300,6 +423,9 @@ namespace ProjectExpNet
 
         }
 
-       
+        private void button3_Click(object sender, EventArgs e)
+        {
+           
+        }
     }
 }

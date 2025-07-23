@@ -59,6 +59,7 @@
             dataGridViewNcm = new DataGridView();
             tabPage9 = new TabPage();
             dataGridViewProdutos = new DataGridView();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewCliente).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -156,7 +157,7 @@
             // 
             dataGridViewCliente.AllowUserToOrderColumns = true;
             dataGridViewCliente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCliente.Location = new Point(0, 0);
+            dataGridViewCliente.Location = new Point(0, 6);
             dataGridViewCliente.Name = "dataGridViewCliente";
             dataGridViewCliente.Size = new Size(883, 424);
             dataGridViewCliente.TabIndex = 11;
@@ -375,11 +376,22 @@
             dataGridViewProdutos.Size = new Size(881, 424);
             dataGridViewProdutos.TabIndex = 0;
             // 
+            // button3
+            // 
+            button3.Location = new Point(367, 571);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 17;
+            button3.Text = "button3";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(909, 609);
+            Controls.Add(button3);
             Controls.Add(tabControl1);
             Controls.Add(textBoxEmpresaId);
             Controls.Add(label1);
@@ -449,5 +461,6 @@
         private DataGridView dataGridViewLinha;
         private DataGridView dataGridViewNcm;
         private DataGridView dataGridViewProdutos;
+        private Button button3;
     }
 }
