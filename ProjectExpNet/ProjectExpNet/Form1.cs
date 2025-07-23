@@ -1,5 +1,6 @@
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Oracle.EntityFrameworkCore;
@@ -26,6 +27,8 @@ namespace ProjectExpNet
             //dataGridView1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             //button2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             //button1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+
+            Processar(0);
         }
 
 
@@ -80,71 +83,13 @@ namespace ProjectExpNet
 
         }
 
-        
+
         private void button2_Click(object sender, EventArgs e)
         {
-            var user = TextBoxUser.Text.ToUpper();
-            var pass = TextBoxSenha.Text.ToUpper();
-            var data = TxtBoxDatabase.Text.ToUpper();
-            var empresaid = textBoxEmpresaId.Text.ToUpper();
+
+        }
 
 
-            var optionsBuilder = new DbContextOptionsBuilder<ContextDb>();
-            optionsBuilder.UseOracle($"User Id={user};Password={pass};Data Source={data}:1521/ORCL;");
-            using var context = new ContextDb(optionsBuilder.Options);
-
-            try
-            {
-
-                DataTable resultado = DbContextExtensions.ExecuteSqlToDataTable(context,
-                    sql: $@"SELECT C.BAIRRO,
-                                   C.CEP,
-                                   C.NOME_CIDADE,
-                                   E.NOME,
-                                   C.ESTADOID,
-                                   C.CNPJ_CPF,
-                                   C.E_MAIL,
-                                   C.ENDERECO,
-                                   C.RAZAO_SOCIAL,
-                                   C.COMPLEMENTO,
-                                   C.NUMERO,
-                                   C.SITE,
-                                   C.INSCRICAO_ESTADUAL,
-                                   C.INSCRICAO_MUNICIPAL,
-                                   C.NOME_FANTASIA,
-                                   C.TIPO_CLIENTE,
-                                   C.OPTANTE_SIMPLES,
-                                   C.DOC_IDENTIDADE,
-                                   C.ORGAO_EXPEDIDOR,
-                                   C.UF_ORGAO_EXPEDIDOR,
-                                   C.NATURALIDADE,
-                                   C.SEXO,
-                                   C.ESTADO_CIVIL,
-                                   C.NACIONALIDADE,
-                                   C.GRUPOID,
-                                   G.NOME,
-                                   C.TABELA_PRECOID,
-                                   C.NOME_TABELA_PRECO,
-                                   C.VENDEDORID,
-                                   C.CONDICAOID, 
-                                   C.NOME_CONDICAO
-                              FROM VW_CLIENTES C, ESTADOS E, GRUPO_CLIENTES G
-                             WHERE  C.ESTADOID = E.ESTADOID
-                               AND C.GRUPOID = G.GRUPOID
-                               AND C.EMPRESAID = G.EMPRESAID
-                               AND C.EMPRESAID = {empresaid}"
-
-                    );
-
-                dataGridView1.DataSource = resultado;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro: {ex.Message}", "Erro ao carregar dados", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }     
-
-   
 
 
 
@@ -155,14 +100,14 @@ namespace ProjectExpNet
 
         private void button1_Click(object sender, EventArgs e)
         {
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridView1.AutoResizeColumns();
+            dataGridViewCliente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCliente.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCliente.AutoResizeColumns();
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            if (dataGridView1.DataSource == null)
+            if (dataGridViewCliente.DataSource == null)
             {
                 MessageBox.Show("Nenhum dado para exportar!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -179,7 +124,7 @@ namespace ProjectExpNet
                 {
                     try
                     {
-                        var dt = (DataTable)dataGridView1.DataSource;
+                        var dt = (DataTable)dataGridViewCliente.DataSource;
 
                         using (var wb = new XLWorkbook())
                         {
@@ -211,6 +156,99 @@ namespace ProjectExpNet
 
         }
 
-        
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int x = tabControl1.SelectedIndex;
+            Processar(x);
+        }
+        private void Processar(int index)
+        {
+            var user = TextBoxUser.Text.ToUpper();
+            var pass = TextBoxSenha.Text.ToUpper();
+            var data = TxtBoxDatabase.Text.ToUpper();
+            var empresaid = textBoxEmpresaId.Text.ToUpper();
+
+
+            var optionsBuilder = new DbContextOptionsBuilder<ContextDb>();
+            optionsBuilder.UseOracle($"User Id={user};Password={pass};Data Source={data}:1521/ORCL;");
+            using var context = new ContextDb(optionsBuilder.Options);
+
+            try
+            {
+                string sql = "";
+                DataTable resultado = null;
+
+                if (index == 0)
+                {
+                    sql = String.Format(Dados.Clientes, empresaid);
+                    resultado = DbContextExtensions.ExecuteSqlToDataTable(context, sql);
+                    dataGridViewCliente.DataSource = resultado;
+                }
+                else if (index == 1)
+                {
+                    sql = String.Format(Dados.TelefoneCliente, empresaid);
+                    resultado = DbContextExtensions.ExecuteSqlToDataTable(context, sql);
+                    dataGridViewTelCliente.DataSource = resultado;
+
+                }
+
+                else if (index == 2)
+                {
+                    sql = String.Format(Dados.Fornecedor, empresaid);
+                    resultado = DbContextExtensions.ExecuteSqlToDataTable(context, sql);
+                    dataGridViewFornecedor.DataSource = resultado;
+                }
+                else if (index == 3)
+                {
+                    sql = String.Format(Dados.TelefoneFornecedor, empresaid);
+                    resultado = DbContextExtensions.ExecuteSqlToDataTable(context, sql);
+                    dataGridViewTelFornecedor.DataSource = resultado;
+                }
+
+                else if (index == 4)
+                {
+                    sql = String.Format(Dados.GrupoProd, empresaid);
+                    resultado = DbContextExtensions.ExecuteSqlToDataTable(context, sql);
+                    dataGridViewGrupoProd.DataSource = resultado;
+                }
+
+                else if (index == 5)
+                {
+                    sql = String.Format(Dados.Marca, empresaid);
+                    resultado = DbContextExtensions.ExecuteSqlToDataTable(context, sql);
+                    dataGridViewMarca.DataSource = resultado;
+                }
+
+                else if (index == 6)
+                {
+                    sql = String.Format(Dados.Linha, empresaid);
+                    resultado = DbContextExtensions.ExecuteSqlToDataTable(context, sql);
+                    dataGridViewLinha.DataSource = resultado;
+                }
+
+                else if (index == 7)
+                {
+                    sql = String.Format(Dados.Ncm, empresaid);
+                    resultado = DbContextExtensions.ExecuteSqlToDataTable(context, sql);
+                    dataGridViewNcm.DataSource = resultado;
+                }
+
+                else if (index == 8) {
+
+                    sql = String.Format(Dados.Produtos, empresaid);
+                    resultado = DbContextExtensions.ExecuteSqlToDataTable(context, sql);
+                    dataGridViewProdutos.DataSource = resultado;
+                }
+
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro: {ex.Message}", "Erro ao carregar dados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+       
     }
 }

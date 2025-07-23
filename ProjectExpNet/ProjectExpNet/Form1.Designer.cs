@@ -36,7 +36,7 @@
             LblDatabase = new Label();
             TxtBoxDatabase = new TextBox();
             BtnConectar = new Button();
-            dataGridView1 = new DataGridView();
+            dataGridViewCliente = new DataGridView();
             button1 = new Button();
             button2 = new Button();
             label1 = new Label();
@@ -44,19 +44,40 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
-            dataGridView2 = new DataGridView();
+            dataGridViewTelCliente = new DataGridView();
             tabPage3 = new TabPage();
+            dataGridViewFornecedor = new DataGridView();
             tabPage4 = new TabPage();
+            dataGridViewTelFornecedor = new DataGridView();
             tabPage5 = new TabPage();
+            dataGridViewGrupoProd = new DataGridView();
             tabPage6 = new TabPage();
+            dataGridViewMarca = new DataGridView();
             tabPage7 = new TabPage();
+            dataGridViewLinha = new DataGridView();
             tabPage8 = new TabPage();
+            dataGridViewNcm = new DataGridView();
             tabPage9 = new TabPage();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            dataGridViewProdutos = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewCliente).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewTelCliente).BeginInit();
+            tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewFornecedor).BeginInit();
+            tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewTelFornecedor).BeginInit();
+            tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewGrupoProd).BeginInit();
+            tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewMarca).BeginInit();
+            tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewLinha).BeginInit();
+            tabPage8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewNcm).BeginInit();
+            tabPage9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewProdutos).BeginInit();
             SuspendLayout();
             // 
             // LblUser
@@ -131,15 +152,15 @@
             BtnConectar.UseVisualStyleBackColor = true;
             BtnConectar.Click += button2_Click;
             // 
-            // dataGridView1
+            // dataGridViewCliente
             // 
-            dataGridView1.AllowUserToOrderColumns = true;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(0, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(883, 424);
-            dataGridView1.TabIndex = 11;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridViewCliente.AllowUserToOrderColumns = true;
+            dataGridViewCliente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCliente.Location = new Point(0, 0);
+            dataGridViewCliente.Name = "dataGridViewCliente";
+            dataGridViewCliente.Size = new Size(883, 424);
+            dataGridViewCliente.TabIndex = 11;
+            dataGridViewCliente.CellContentClick += dataGridView1_CellContentClick;
             // 
             // button1
             // 
@@ -194,10 +215,11 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(891, 452);
             tabControl1.TabIndex = 16;
+            tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(dataGridView1);
+            tabPage1.Controls.Add(dataGridViewCliente);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
@@ -209,7 +231,7 @@
             // 
             // tabPage2
             // 
-            tabPage2.Controls.Add(dataGridView2);
+            tabPage2.Controls.Add(dataGridViewTelCliente);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
@@ -218,17 +240,18 @@
             tabPage2.Text = "TEL. CLIENTES";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // dataGridViewTelCliente
             // 
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(0, 3);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.Size = new Size(883, 421);
-            dataGridView2.TabIndex = 0;
-            dataGridView2.CellContentClick += dataGridView2_CellContentClick;
+            dataGridViewTelCliente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewTelCliente.Location = new Point(0, 3);
+            dataGridViewTelCliente.Name = "dataGridViewTelCliente";
+            dataGridViewTelCliente.Size = new Size(883, 421);
+            dataGridViewTelCliente.TabIndex = 0;
+            dataGridViewTelCliente.CellContentClick += dataGridView2_CellContentClick;
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(dataGridViewFornecedor);
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Size = new Size(883, 424);
@@ -236,8 +259,17 @@
             tabPage3.Text = "FORNECEDORES";
             tabPage3.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewFornecedor
+            // 
+            dataGridViewFornecedor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewFornecedor.Location = new Point(0, 0);
+            dataGridViewFornecedor.Name = "dataGridViewFornecedor";
+            dataGridViewFornecedor.Size = new Size(881, 424);
+            dataGridViewFornecedor.TabIndex = 0;
+            // 
             // tabPage4
             // 
+            tabPage4.Controls.Add(dataGridViewTelFornecedor);
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Size = new Size(883, 424);
@@ -245,8 +277,17 @@
             tabPage4.Text = "TEL. FORNECEDORES";
             tabPage4.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewTelFornecedor
+            // 
+            dataGridViewTelFornecedor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewTelFornecedor.Location = new Point(3, 3);
+            dataGridViewTelFornecedor.Name = "dataGridViewTelFornecedor";
+            dataGridViewTelFornecedor.Size = new Size(880, 421);
+            dataGridViewTelFornecedor.TabIndex = 0;
+            // 
             // tabPage5
             // 
+            tabPage5.Controls.Add(dataGridViewGrupoProd);
             tabPage5.Location = new Point(4, 24);
             tabPage5.Name = "tabPage5";
             tabPage5.Size = new Size(883, 424);
@@ -254,8 +295,17 @@
             tabPage5.Text = "GRUPO PRODUTOS";
             tabPage5.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewGrupoProd
+            // 
+            dataGridViewGrupoProd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewGrupoProd.Location = new Point(-4, 0);
+            dataGridViewGrupoProd.Name = "dataGridViewGrupoProd";
+            dataGridViewGrupoProd.Size = new Size(885, 424);
+            dataGridViewGrupoProd.TabIndex = 0;
+            // 
             // tabPage6
             // 
+            tabPage6.Controls.Add(dataGridViewMarca);
             tabPage6.Location = new Point(4, 24);
             tabPage6.Name = "tabPage6";
             tabPage6.Size = new Size(883, 424);
@@ -263,8 +313,17 @@
             tabPage6.Text = "MARCA";
             tabPage6.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewMarca
+            // 
+            dataGridViewMarca.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewMarca.Location = new Point(-4, 0);
+            dataGridViewMarca.Name = "dataGridViewMarca";
+            dataGridViewMarca.Size = new Size(887, 424);
+            dataGridViewMarca.TabIndex = 0;
+            // 
             // tabPage7
             // 
+            tabPage7.Controls.Add(dataGridViewLinha);
             tabPage7.Location = new Point(4, 24);
             tabPage7.Name = "tabPage7";
             tabPage7.Size = new Size(883, 424);
@@ -272,8 +331,17 @@
             tabPage7.Text = "LINHA";
             tabPage7.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewLinha
+            // 
+            dataGridViewLinha.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewLinha.Location = new Point(3, 3);
+            dataGridViewLinha.Name = "dataGridViewLinha";
+            dataGridViewLinha.Size = new Size(877, 418);
+            dataGridViewLinha.TabIndex = 0;
+            // 
             // tabPage8
             // 
+            tabPage8.Controls.Add(dataGridViewNcm);
             tabPage8.Location = new Point(4, 24);
             tabPage8.Name = "tabPage8";
             tabPage8.Size = new Size(883, 424);
@@ -281,14 +349,31 @@
             tabPage8.Text = "NCM";
             tabPage8.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewNcm
+            // 
+            dataGridViewNcm.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewNcm.Location = new Point(0, 0);
+            dataGridViewNcm.Name = "dataGridViewNcm";
+            dataGridViewNcm.Size = new Size(880, 421);
+            dataGridViewNcm.TabIndex = 0;
+            // 
             // tabPage9
             // 
+            tabPage9.Controls.Add(dataGridViewProdutos);
             tabPage9.Location = new Point(4, 24);
             tabPage9.Name = "tabPage9";
             tabPage9.Size = new Size(883, 424);
             tabPage9.TabIndex = 8;
             tabPage9.Text = "PRODUTOS";
             tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewProdutos
+            // 
+            dataGridViewProdutos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewProdutos.Location = new Point(0, 0);
+            dataGridViewProdutos.Name = "dataGridViewProdutos";
+            dataGridViewProdutos.Size = new Size(881, 424);
+            dataGridViewProdutos.TabIndex = 0;
             // 
             // Form1
             // 
@@ -310,11 +395,25 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "EXPORTAÇÃO DE DADOS";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewCliente).EndInit();
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewTelCliente).EndInit();
+            tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewFornecedor).EndInit();
+            tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewTelFornecedor).EndInit();
+            tabPage5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewGrupoProd).EndInit();
+            tabPage6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewMarca).EndInit();
+            tabPage7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewLinha).EndInit();
+            tabPage8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewNcm).EndInit();
+            tabPage9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewProdutos).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -327,7 +426,7 @@
         private Label LblDatabase;
         private TextBox TxtBoxDatabase;
         private Button BtnConectar;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridViewCliente;
         private Button button1;
         private Button button2;
         private Label label1;
@@ -342,6 +441,13 @@
         private TabPage tabPage7;
         private TabPage tabPage8;
         private TabPage tabPage9;
-        private DataGridView dataGridView2;
+        private DataGridView dataGridViewTelCliente;
+        private DataGridView dataGridViewFornecedor;
+        private DataGridView dataGridViewTelFornecedor;
+        private DataGridView dataGridViewGrupoProd;
+        private DataGridView dataGridViewMarca;
+        private DataGridView dataGridViewLinha;
+        private DataGridView dataGridViewNcm;
+        private DataGridView dataGridViewProdutos;
     }
 }
