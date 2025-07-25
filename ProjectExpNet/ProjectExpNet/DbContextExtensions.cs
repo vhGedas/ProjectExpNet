@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
+using ProjectExpNet.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,9 +12,13 @@ namespace ProjectExpNet
 {
      public static class DbContextExtensions
     {
-        public static DataTable ExecuteSqlToDataTable(this DbContext context, string sql)
+        public static DataTable ExecuteSqlToDataTable(string user, string pass, string data , string sql)
         {
             var dt = new DataTable();
+
+            var optionsBuilder = new DbContextOptionsBuilder<ContextDb>();
+            optionsBuilder.UseOracle($"User Id={user};Password={pass};Data Source={data}:1521/ORCL;");
+            using var context = new ContextDb(optionsBuilder.Options);
 
             using (var command = context.Database.GetDbConnection().CreateCommand())
             {

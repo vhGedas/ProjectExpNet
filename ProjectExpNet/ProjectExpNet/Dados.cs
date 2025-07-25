@@ -9,6 +9,7 @@ namespace ProjectExpNet
 {
     public class Dados
     {
+
         public static string Clientes = @"SELECT C.BAIRRO,
                                            C.CEP,
                                            C.NOME_CIDADE,
@@ -53,7 +54,7 @@ namespace ProjectExpNet
                                              AND T.PESSOAID = C.CLIENTEID
                                              AND T.EMPRESAID = {0}";
 
-        public static string Fornecedor = @"SELECT F.BAIRRO,
+    public static string Fornecedor = @"SELECT F.BAIRRO,
                                                F.CEP,
                                                F.CIDADE_NOME,
                                                E.NOME,
@@ -78,32 +79,32 @@ namespace ProjectExpNet
                                          AND F.FORNECEDORID = P.PESSOAID
                                          AND F.EMPRESAID = {0}";
 
-        public static string TelefoneFornecedor = @"SELECT F.CNPJ_CPF, T.DDD, T.NUMERO, T.TELEFONE_DEFAULT AS PRINCIPAL 
+    public static string TelefoneFornecedor = @"SELECT F.CNPJ_CPF, T.DDD, T.NUMERO, T.TELEFONE_DEFAULT AS PRINCIPAL 
                                                      FROM VW_FORNECEDORES F, TELEFONES T
                                                      WHERE F.EMPRESAID = T.EMPRESAID
                                                      AND F.FORNECEDORID = T.PESSOAID 
                                                      AND T.EMPRESAID = {0}";
 
-        public static string GrupoProd = @"SELECT G.GRUPO_PRODUTOID, G.NOME
+    public static string GrupoProd = @"SELECT G.GRUPO_PRODUTOID, G.NOME
                                              FROM GRUPO_PRODUTOS G
                                              WHERE G.EMPRESAID = {0}
                                              ORDER BY G.GRUPO_PRODUTOID";
 
 
-        public static string Marca = @"SELECT M.MARCAID, M.DESCRICAO
+    public static string Marca = @"SELECT M.MARCAID, M.DESCRICAO
                                          FROM MARCAS M
                                          WHERE M.EMPRESAID = {0}
                                          ORDER BY M.MARCAID";
 
-        public static string Linha = @"SELECT L.LINHAID, L.DESCRICAO
+    public static string Linha = @"SELECT L.LINHAID, L.DESCRICAO
                                          FROM LINHA_PRODUTOS L
                                          WHERE L.EMPRESAID = {0}
                                         ORDER BY L.LINHAID";
 
-        public static string Ncm = @"SELECT N.CODIGO_NCM, N.DESCRICAO, N.DESCRICAO_COMPLEMENTAR
+    public static string Ncm = @"SELECT N.CODIGO_NCM, N.DESCRICAO, N.DESCRICAO_COMPLEMENTAR
                                      FROM CODIGOS_NCM N";
 
-        public static string Produtos = @"SELECT P.DESC_VENDA,
+    public static string Produtos = @"SELECT P.DESC_VENDA,
                                            P.UND_VENDA,
                                            U.DESCRICAO,
                                            P.DESC_GRUPO,
@@ -131,6 +132,7 @@ namespace ProjectExpNet
                                      AND P.EMPRESAID = VP.EMPRESAID
                                      AND P.PRODUTOID = VP.PRODUTOID
                                      AND P.EMPRESAID = {0}";
-    }
-
 }
+  }
+
+

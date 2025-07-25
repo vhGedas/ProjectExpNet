@@ -35,9 +35,7 @@
             TextBoxSenha = new TextBox();
             LblDatabase = new Label();
             TxtBoxDatabase = new TextBox();
-            BtnConectar = new Button();
             dataGridViewCliente = new DataGridView();
-            button1 = new Button();
             button2 = new Button();
             label1 = new Label();
             textBoxEmpresaId = new TextBox();
@@ -59,7 +57,6 @@
             dataGridViewNcm = new DataGridView();
             tabPage9 = new TabPage();
             dataGridViewProdutos = new DataGridView();
-            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewCliente).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -131,7 +128,6 @@
             LblDatabase.Size = new Size(105, 31);
             LblDatabase.TabIndex = 8;
             LblDatabase.Text = "DATABASE:";
-            LblDatabase.Click += label1_Click_1;
             // 
             // TxtBoxDatabase
             // 
@@ -143,16 +139,6 @@
             TxtBoxDatabase.Text = "192.168.1.237";
             TxtBoxDatabase.TextChanged += TxtBoxDatabase_TextChanged;
             // 
-            // BtnConectar
-            // 
-            BtnConectar.Location = new Point(735, 12);
-            BtnConectar.Name = "BtnConectar";
-            BtnConectar.Size = new Size(127, 61);
-            BtnConectar.TabIndex = 10;
-            BtnConectar.Text = "CONECTAR";
-            BtnConectar.UseVisualStyleBackColor = true;
-            BtnConectar.Click += button2_Click;
-            // 
             // dataGridViewCliente
             // 
             dataGridViewCliente.AllowUserToOrderColumns = true;
@@ -161,17 +147,6 @@
             dataGridViewCliente.Name = "dataGridViewCliente";
             dataGridViewCliente.Size = new Size(883, 424);
             dataGridViewCliente.TabIndex = 11;
-            dataGridViewCliente.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(12, 574);
-            button1.Name = "button1";
-            button1.Size = new Size(105, 23);
-            button1.TabIndex = 12;
-            button1.Text = "ORGANIZAR";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -199,6 +174,7 @@
             textBoxEmpresaId.Size = new Size(118, 23);
             textBoxEmpresaId.TabIndex = 15;
             textBoxEmpresaId.Text = "1";
+            textBoxEmpresaId.TextChanged += textBoxEmpresaId_TextChanged;
             // 
             // tabControl1
             // 
@@ -228,7 +204,6 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "CLIENTES";
             tabPage1.UseVisualStyleBackColor = true;
-            tabPage1.Click += tabPage1_Click_1;
             // 
             // tabPage2
             // 
@@ -248,7 +223,6 @@
             dataGridViewTelCliente.Name = "dataGridViewTelCliente";
             dataGridViewTelCliente.Size = new Size(883, 421);
             dataGridViewTelCliente.TabIndex = 0;
-            dataGridViewTelCliente.CellContentClick += dataGridView2_CellContentClick;
             // 
             // tabPage3
             // 
@@ -376,28 +350,15 @@
             dataGridViewProdutos.Size = new Size(881, 424);
             dataGridViewProdutos.TabIndex = 0;
             // 
-            // button3
-            // 
-            button3.Location = new Point(367, 571);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 17;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(909, 609);
-            Controls.Add(button3);
             Controls.Add(tabControl1);
             Controls.Add(textBoxEmpresaId);
             Controls.Add(label1);
             Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(BtnConectar);
             Controls.Add(TxtBoxDatabase);
             Controls.Add(LblDatabase);
             Controls.Add(TextBoxSenha);
@@ -437,9 +398,7 @@
         private TextBox TextBoxSenha;
         private Label LblDatabase;
         private TextBox TxtBoxDatabase;
-        private Button BtnConectar;
         private DataGridView dataGridViewCliente;
-        private Button button1;
         private Button button2;
         private Label label1;
         private TextBox textBoxEmpresaId;
@@ -461,6 +420,5 @@
         private DataGridView dataGridViewLinha;
         private DataGridView dataGridViewNcm;
         private DataGridView dataGridViewProdutos;
-        private Button button3;
     }
 }
