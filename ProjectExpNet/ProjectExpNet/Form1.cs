@@ -295,7 +295,7 @@ namespace ProjectExpNet
             {
                 MessageBox.Show(erro.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                int x = 0;
+         
             }
         }
 
@@ -306,6 +306,7 @@ namespace ProjectExpNet
 
         private void TextBoxUser_TextChanged(object sender, EventArgs e)
         {
+            
             user = TextBoxUser.Text.ToUpper();
 
             
@@ -313,18 +314,21 @@ namespace ProjectExpNet
 
         private void TextBoxSenha_TextChanged(object sender, EventArgs e)
         {
+            
             pass = TextBoxSenha.Text.ToUpper();
 
         }
 
         private void TxtBoxDatabase_TextChanged(object sender, EventArgs e)
         {
+            
             data = TxtBoxDatabase.Text.ToUpper();
 
         }
 
         private void textBoxEmpresaId_TextChanged(object sender, EventArgs e)
         {
+            
             empresaid = textBoxEmpresaId.Text.ToUpper();
 
         }

@@ -96,7 +96,6 @@
             TextBoxUser.Name = "TextBoxUser";
             TextBoxUser.Size = new Size(133, 23);
             TextBoxUser.TabIndex = 3;
-            TextBoxUser.Text = "VH_NET";
             TextBoxUser.TextChanged += TextBoxUser_TextChanged;
             TextBoxUser.KeyDown += TextBoxUser_KeyDown;
             // 
@@ -117,7 +116,6 @@
             TextBoxSenha.PasswordChar = '*';
             TextBoxSenha.Size = new Size(133, 23);
             TextBoxSenha.TabIndex = 7;
-            TextBoxSenha.Text = "MANAGER";
             TextBoxSenha.TextChanged += TextBoxSenha_TextChanged;
             // 
             // LblDatabase
@@ -136,7 +134,6 @@
             TxtBoxDatabase.Name = "TxtBoxDatabase";
             TxtBoxDatabase.Size = new Size(133, 23);
             TxtBoxDatabase.TabIndex = 9;
-            TxtBoxDatabase.Text = "192.168.1.237";
             TxtBoxDatabase.TextChanged += TxtBoxDatabase_TextChanged;
             // 
             // dataGridViewCliente
@@ -173,7 +170,6 @@
             textBoxEmpresaId.Name = "textBoxEmpresaId";
             textBoxEmpresaId.Size = new Size(118, 23);
             textBoxEmpresaId.TabIndex = 15;
-            textBoxEmpresaId.Text = "1";
             textBoxEmpresaId.TextChanged += textBoxEmpresaId_TextChanged;
             // 
             // tabControl1
