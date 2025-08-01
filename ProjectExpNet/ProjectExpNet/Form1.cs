@@ -23,17 +23,12 @@ namespace ProjectExpNet
         private string pass;
         private string data;
         public string empresaid;
-       
+
 
         public Form1()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
-            //this.WindowState = FormWindowState.Maximized;
-            //dataGridView1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            //button2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            //button1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-
             user = TextBoxUser.Text.ToUpper();
             pass = TextBoxSenha.Text.ToUpper();
             data = TxtBoxDatabase.Text.ToUpper();
@@ -136,6 +131,14 @@ namespace ProjectExpNet
                 string sql = "";
                 DataTable resultado = null;
 
+                if (user.Length == 0 && pass.Length == 0 && data.Length == 0 && empresaid.Length == 0)
+                {
+
+                    return;
+                }
+
+
+
                 if (index == 0)
                 {
                     sql = String.Format(Dados.Clientes, empresaid);
@@ -203,7 +206,9 @@ namespace ProjectExpNet
 
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro: {ex.Message}", "Erro ao carregar dados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show($"Erro: {ex.Message}", "Erro ao carregar dados", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Erro: {ex.Message}", "Erro ao carregar dados");
+                return;
             }
 
         }
@@ -235,7 +240,7 @@ namespace ProjectExpNet
                 string sqlClientes = Dados.Clientes;
                 if (sqlClientes.Count() != 0)
                 {
-                    ExportarDataTableParaCSV(DbContextExtensions.ExecuteSqlToDataTable(user, pass, data,String.Format(sqlClientes,empresaid)), "Clientes");
+                    ExportarDataTableParaCSV(DbContextExtensions.ExecuteSqlToDataTable(user, pass, data, String.Format(sqlClientes, empresaid)), "Clientes");
                 }
 
                 string sqlNcm = Dados.Ncm;
@@ -295,40 +300,40 @@ namespace ProjectExpNet
             {
                 MessageBox.Show(erro.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-         
+
             }
         }
 
 
-       
+
 
 
 
         private void TextBoxUser_TextChanged(object sender, EventArgs e)
         {
-            
+
             user = TextBoxUser.Text.ToUpper();
 
-            
+
         }
 
         private void TextBoxSenha_TextChanged(object sender, EventArgs e)
         {
-            
+
             pass = TextBoxSenha.Text.ToUpper();
 
         }
 
         private void TxtBoxDatabase_TextChanged(object sender, EventArgs e)
         {
-            
+
             data = TxtBoxDatabase.Text.ToUpper();
 
         }
 
         private void textBoxEmpresaId_TextChanged(object sender, EventArgs e)
         {
-            
+
             empresaid = textBoxEmpresaId.Text.ToUpper();
 
         }
